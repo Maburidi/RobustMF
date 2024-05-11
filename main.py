@@ -41,9 +41,6 @@ from defense import *
 from defense import GCN 
 from utils import * 
 
-#from deeprobust.graph.defense import GCN
-#from deeprobust.graph.data import Dataset, PrePtbDataset
-#from deeprobust.graph.utils import preprocess, encode_onehot, get_train_val_test
 
 def Parser():
     parser = argparse.ArgumentParser(description="RobustFM")
