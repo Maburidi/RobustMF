@@ -40,7 +40,7 @@ from Datasets import Dataset, PrePtbDataset
 from defense import * 
 from defense import GCN 
 from utils import * 
-
+from MFsolver import symnmf_newton 
 
 def Parser():
     parser = argparse.ArgumentParser(description="RobustFM")
