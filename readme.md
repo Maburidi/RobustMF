@@ -1,7 +1,7 @@
 # Defending Graph Neural Networks Against Adversarial Attacks via Matrix Factorization
 
 
-This is the complete code for the OTGK_DP framework to predict ADMET durg properties. The work is pubished in the following papers: <br />
+This is the complete code for the RobustMF framework to defense Graph Neural Netowrks GNN against adverisrial Attacks. The work is pubished in the following papers: <br />
 ([Paper]())
 
 
