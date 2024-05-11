@@ -28,6 +28,10 @@ import torch.nn as nn
 import math
 from copy import deepcopy
 from sklearn.metrics import f1_score
+from scipy.io import loadmat
+from scipy.sparse import csr_matrix
+import scipy.io
+
 
 
 from solverFM import *
@@ -52,6 +56,8 @@ def Parser():
     parser.add_argument('--dropout', type=float, default=0.5, help="Dropout rate for regularization")
     parser.add_argument('--epochs', type=int, default=250, help="Number of training epochs")
     parser.add_argument('--only_gcn', action='store_true', help="Whether to use only GCN layer or full model")
+    parser.add_argument('--read_clean', type=int, default=1, help="if you have the cleaned data saved, read it")
+
 
     return parser
 
@@ -108,24 +114,40 @@ def main(args):
     torch.manual_seed(seed)
 
 
-
+    ############### Set up the targeted model - a GCN ##############
     model = GCN(nfeat=features.shape[1],
             nhid=hidden,
             nclass=labels.max().item() + 1,
             dropout=dropout, device=device)
 
+    ############## Save Noisy "Petreubed" data ############# 
+    if args.save: 
+        perturbed_adj
+        dense_matrix = perturbed_adj.toarray()
+        name_ = dataset+'_' + str(int(100*ptb_rate) )+ '_' + attack
+        scipy.io.savemat('/content/drive/MyDrive/Colab_Notebooks/Proj_10_RobustMF/'+name_+'.mat', {name_: list(dense_matrix)})
 
+    if args.read_clean:           #### read the cleaned saved data
+        name_2 = 'clean_'+ name_ + '.mat'
+        M =10 
+        data = loadmat('/content/drive/MyDrive/Colab_Notebooks/Proj_10_RobustMF/'+name_2)
+        perturbed_adj0 = data['M']
+        adj_clean = torch.FloatTensor(perturbed_adj0)
 
-
- 
-
+        ### Binirize 
+        thr = 0.1
+        adj_clean[adj_clean >= thr] = 1
+        model.fit(features, adj_clean, labels, idx_train, idx_val, verbose=False, train_iters=epochs)
+        model.test(idx_test)
+    else:           ######## Run the defense MF stratigy 
+        perturbed_adj, features, labels = preprocess(perturbed_adj, features, labels, preprocess_adj=False, device=device)
+        adj_new = symnmf_newton(perturbed_adj, k=10)   # k is the latent feature vector
+        model.fit(features, adj_new, labels, idx_train, idx_val, verbose=False, train_iters=args.epochs)
+        model.test(idx_test)
+        
    
 if __name__ == "__main__":
     parser = Parser()
     args = parser.parse_args()
     main(args)
-
-
-
-
 
