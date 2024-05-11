@@ -26,8 +26,6 @@ First install dependencies:
 ```
 Also, install DeepRobust 
 ```python
-!git clone https://github.com/Bharat-Runwal/RWL-GNN.git
-########################### INISTALL DEEPROBUST ################################
 !git clone https://github.com/DSE-MSU/DeepRobust.git
 %cd DeepRobust
 !python setup.py install
