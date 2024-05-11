@@ -36,13 +36,17 @@ Also, install DeepRobust
 
 ## Main Results: 
 
-<img width="911" alt="Screen Shot 2023-12-18 at 10 33 32 AM" src="https://github.com/Maburidi/OTGK_DP/assets/48891624/174fa587-06e1-46c3-b32b-399fdea34d2c">
+<img width="1194" alt="image" src="https://github.com/Maburidi/RobustMF/assets/48891624/66905d3d-5889-4892-8800-abee85b83d48">
+
+<img width="1233" alt="image" src="https://github.com/Maburidi/RobustMF/assets/48891624/56b93562-4a30-4748-af06-3305c094c049">
 
 
 
  <br /> 
   <br /> 
    <br /> 
+
+
 
 
 Cite as:
